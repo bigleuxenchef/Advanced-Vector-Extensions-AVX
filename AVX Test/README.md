@@ -10,12 +10,15 @@ Much before GPU existed, processor designer always try to come with specific res
 Wikipedia is doing a good job educating us on something not new but that new generation may think that the revolution has just happened in the post internet time!
 
 >[:eyes:RISC architecture](https://en.wikipedia.org/wiki/Reduced_instruction_set_computer)
+
 >[:eyes:DSP Architecture](https://en.wikipedia.org/wiki/Digital_signal_processor)
+
 >[:eyes:AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)
 
 More information on how to use all the AVX features can be found at :
 
 >[:eyes:CompilerAutovectorizationGuide source link](https://software.intel.com/sites/default/files/m/4/8/8/2/a/31848-CompilerAutovectorizationGuide.pdf)
+
 >[:eyes:CompilerAutovectorizationGuide copy link](31848-CompilerAutovectorizationGuide.pdf)
 
 
