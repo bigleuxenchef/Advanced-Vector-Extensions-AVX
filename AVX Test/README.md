@@ -24,6 +24,8 @@ More information on how to use all the AVX features can be found at :
 
 ## using AVX
 
+Most modern c++ compiler can automatically vectorize loops. In the example here under you will see how you can use intrinsic code to control vectorization at the code machine level. However the compiler has implemented very smart combination of optimization that does not just limit to one straight pattern but combining several techniques and features.
+
 ### Use case #1 
 
 
