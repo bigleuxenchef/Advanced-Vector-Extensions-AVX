@@ -132,6 +132,46 @@ sse128 1.1140102 s
 sse256 0. 524420 s
 
 ```
+
+
+```assembly
++0x98	    movq                %r11, (%rsi,%r10,8)
++0x9c	    testb               $1, %r9b
++0xa0	    jne                 "void normal_add<float>(float*, int)+0xab"
++0xa6	    jmp                 "void normal_add<float>(float*, int)+0x119"
++0xab	    movl                $2, %eax
++0xb0	    movq                45833(%rip), %rcx
++0xb7	    addq                $1, %rcx
++0xbb	    movq                %rcx, 45822(%rip)
++0xc2	    movslq              -16(%rbp), %rcx
++0xc6	    movq                -8(%rbp), %rdx
++0xca	    vmovss              (%rdx,%rcx,4), %xmm0
++0xcf	    movl                -12(%rbp), %esi
++0xd2	    movl                %eax, -52(%rbp)
++0xd5	    movl                %esi, %eax
++0xd7	    cltd
++0xd8	    movl                -52(%rbp), %esi
++0xdb	    idivl               %esi
++0xdd	    addl                -16(%rbp), %eax
++0xe0	    movslq              %eax, %rcx
++0xe3	    movq                -8(%rbp), %rdi
++0xe7	    vaddss              (%rdi,%rcx,4), %xmm0, %xmm0
++0xec	    movslq              -16(%rbp), %rcx
++0xf0	    movq                -8(%rbp), %rdi
++0xf4	    vmovss              %xmm0, (%rdi,%rcx,4)
++0xf9	    movq                45768(%rip), %rax
++0x100	    addq                $1, %rax
++0x104	    movq                %rax, 45757(%rip)
++0x10b	    movl                -16(%rbp), %ecx
++0x10e	    addl                $1, %ecx
++0x111	    movl                %ecx, -16(%rbp)
++0x114	    jmp                 "void normal_add<float>(float*, int)+0x4d"
++0x119	movq                45744(%rip), %rax
++0x120	addq                $1, %rax
++0x124	movq                %rax, 45733(%rip)
+```
+
+
 ### Compiler options : all optimization
 
 ```
@@ -232,9 +272,60 @@ sse256 0. 262520 s
 
 ```
 
+here under few screen shot on the code profiling that demonstrate the assembler code of the standard mormal_add function using AVX features after compiler optimized
 
+the code has been so much optimized that everything has been inlined, this is where it is in the code : between `+0x634 +0x6ac`, we can see the loop `+0x680 +0x6ac`
 
+```assembly
++0x618	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
++0x61d	movq                %rax, -320(%rbp)
++0x624	callq               "DYLD-STUB$$clock"
++0x629	movq                %rax, -184(%rbp)
++0x630	movq                -48(%rbp), %rbx
++0x634	leaq                48709(%rip), %r14
++0x63b	vmovdqa             48701(%rip), %xmm0
++0x643	vpaddq              42501(%rip), %xmm0, %xmm0
++0x64b	vmovdqa             %xmm0, 48685(%rip)
++0x653	callq               "DYLD-STUB$$mcount"
++0x658	xorl                %eax, %eax
++0x65a	cmpl                $2, %r12d
++0x65e	setl                %al
++0x661	movq                %rax, -64(%rbp)
++0x665	incq                16(%r14,%rax,8)
++0x66a	cmpl                $2, %r12d
++0x66e	jl                  "void GlobalTest<double>(int)+0x6ac"
++0x670	movl                -56(%rbp), %eax
++0x673	shrl                %eax
++0x675	leaq                (%rbx,%rax,8), %rcx
++0x679	xorl                %edx, %edx
++0x67b	nopl                (%rax,%rax)
++0x680	    incq                48673(%rip)
++0x687	    vmovsd              (%rbx,%rdx,8), %xmm0
++0x68c	    vaddsd              (%rcx,%rdx,8), %xmm0, %xmm0
++0x691	    vmovsd              %xmm0, (%rbx,%rdx,8)
++0x696	    incq                %rdx
++0x699	    xorl                %esi, %esi
++0x69b	    cmpq                %rax, %rdx
++0x69e	    setge               %sil
++0x6a2	    incq                16(%r14,%rsi,8)
++0x6a7	    cmpq                %rax, %rdx
++0x6aa	    jl                  "void GlobalTest<double>(int)+0x680"
++0x6ac	incq                48621(%rip)
++0x6b3	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
++0x6b8	movq                %rax, -328(%rbp)
++0x6bf	callq               "DYLD-STUB$$clock"
++0x6c4	movq                %rax, -176(%rbp)
+
+```
 ## Modern compiler are integrating vectorization in standard optimization configuration
 
 
 interesting to notice that we are a bit lost here because the optimizer has even optimized sse128! 
+
+
+## Profiling Tools
+Rather than including marker in the code in a form of logging information, a better approadch is to use profiling tools like valgrind on linux or Instruments on osx.
+
+<img src="./Images/AVX-CPU-Profile.png" width=70% >
+
+
