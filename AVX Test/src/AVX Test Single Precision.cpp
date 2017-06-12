@@ -198,7 +198,7 @@ void sse256_div(T* a, int N) {
 template<typename T>
 void GlobalTest(int N) {
 	T* a;
-	cout << "!!!Hello World OF Advanced Vector Extensions for : "
+	cout << "\n\n!!!Hello World OF Advanced Vector Extensions for : "
 			<< typeid(T).name() << " sizeof  : " << sizeof(T) << endl;
 	auto alloc_start = chrono::high_resolution_clock::now();
 

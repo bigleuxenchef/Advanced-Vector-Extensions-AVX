@@ -89,6 +89,8 @@ sse256 0. 293546 s
 normal 1.1807887 s
 sse128 0. 442165 s
 sse256 0. 251021 s
+
+
 !!!Hello World OF Advanced Vector Extensions for : d sizeof  : 8
 Effective Threads Runtime
 ********* SQRT TEST ************
@@ -186,6 +188,8 @@ sse256 0. 124076 s
 normal 0. 128529 s
 sse128 0. 132324 s
 sse256 0. 136171 s
+
+
 !!!Hello World OF Advanced Vector Extensions for : d sizeof  : 8
 Effective Threads Runtime
 ********* SQRT TEST ************
