@@ -135,14 +135,12 @@ sse256 0. 524420 s
 
 
 ```assembly
-+0x98	    movq                %r11, (%rsi,%r10,8)
-+0x9c	    testb               $1, %r9b
 +0xa0	    jne                 "void normal_add<float>(float*, int)+0xab"
 +0xa6	    jmp                 "void normal_add<float>(float*, int)+0x119"
 +0xab	    movl                $2, %eax
-+0xb0	    movq                45833(%rip), %rcx
++0xb0	    movq                10553(%rip), %rcx
 +0xb7	    addq                $1, %rcx
-+0xbb	    movq                %rcx, 45822(%rip)
++0xbb	    movq                %rcx, 10542(%rip)
 +0xc2	    movslq              -16(%rbp), %rcx
 +0xc6	    movq                -8(%rbp), %rdx
 +0xca	    vmovss              (%rdx,%rcx,4), %xmm0
@@ -159,16 +157,14 @@ sse256 0. 524420 s
 +0xec	    movslq              -16(%rbp), %rcx
 +0xf0	    movq                -8(%rbp), %rdi
 +0xf4	    vmovss              %xmm0, (%rdi,%rcx,4)
-+0xf9	    movq                45768(%rip), %rax
++0xf9	    movq                10488(%rip), %rax
 +0x100	    addq                $1, %rax
-+0x104	    movq                %rax, 45757(%rip)
++0x104	    movq                %rax, 10477(%rip)
 +0x10b	    movl                -16(%rbp), %ecx
 +0x10e	    addl                $1, %ecx
 +0x111	    movl                %ecx, -16(%rbp)
 +0x114	    jmp                 "void normal_add<float>(float*, int)+0x4d"
-+0x119	movq                45744(%rip), %rax
-+0x120	addq                $1, %rax
-+0x124	movq                %rax, 45733(%rip)
+
 ```
 
 
@@ -274,58 +270,72 @@ sse256 0. 262520 s
 
 here under few screen shot on the code profiling that demonstrate the assembler code of the standard mormal_add function using AVX features after compiler optimized
 
-the code has been so much optimized that everything has been inlined, this is where it is in the code : between `+0x634 +0x6ac`, we can see the loop `+0x680 +0x6ac`
+the code has been so much optimized that everything has been in-lined, anyway after some invesigation it is not too complicated to figure out, here it is. 
 
 ```assembly
-+0x618	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
-+0x61d	movq                %rax, -320(%rbp)
-+0x624	callq               "DYLD-STUB$$clock"
-+0x629	movq                %rax, -184(%rbp)
-+0x630	movq                -48(%rbp), %rbx
-+0x634	leaq                48709(%rip), %r14
-+0x63b	vmovdqa             48701(%rip), %xmm0
-+0x643	vpaddq              42501(%rip), %xmm0, %xmm0
-+0x64b	vmovdqa             %xmm0, 48685(%rip)
-+0x653	callq               "DYLD-STUB$$mcount"
-+0x658	xorl                %eax, %eax
-+0x65a	cmpl                $2, %r12d
-+0x65e	setl                %al
-+0x661	movq                %rax, -64(%rbp)
-+0x665	incq                16(%r14,%rax,8)
-+0x66a	cmpl                $2, %r12d
-+0x66e	jl                  "void GlobalTest<double>(int)+0x6ac"
-+0x670	movl                -56(%rbp), %eax
-+0x673	shrl                %eax
-+0x675	leaq                (%rbx,%rax,8), %rcx
-+0x679	xorl                %edx, %edx
-+0x67b	nopl                (%rax,%rax)
-+0x680	    incq                48673(%rip)
-+0x687	    vmovsd              (%rbx,%rdx,8), %xmm0
-+0x68c	    vaddsd              (%rcx,%rdx,8), %xmm0, %xmm0
-+0x691	    vmovsd              %xmm0, (%rbx,%rdx,8)
-+0x696	    incq                %rdx
-+0x699	    xorl                %esi, %esi
-+0x69b	    cmpq                %rax, %rdx
-+0x69e	    setge               %sil
-+0x6a2	    incq                16(%r14,%rsi,8)
-+0x6a7	    cmpq                %rax, %rdx
-+0x6aa	    jl                  "void GlobalTest<double>(int)+0x680"
-+0x6ac	incq                48621(%rip)
-+0x6b3	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
-+0x6b8	movq                %rax, -328(%rbp)
-+0x6bf	callq               "DYLD-STUB$$clock"
-+0x6c4	movq                %rax, -176(%rbp)
-
++0xed	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
++0xf2	callq               "DYLD-STUB$$clock"
++0xf7	movq                -32(%rbp), %rbx
++0xfb	leaq                10334(%rip), %r15
++0x102	vmovdqa             10326(%rip), %xmm0
++0x10a	vpaddq              8478(%rip), %xmm0, %xmm0
++0x112	vmovdqa             %xmm0, 10310(%rip)
++0x11a	callq               "DYLD-STUB$$mcount"
++0x11f	xorl                %eax, %eax
++0x121	cmpl                $2, %r14d
++0x125	setl                %al
++0x128	incq                16(%r15,%rax,8)
++0x12d	cmpl                $2, %r14d
++0x131	jl                  "main+0x16b"
++0x133	shrl                %r14d
++0x136	leaq                (%rbx,%r14,4), %rax
++0x13a	xorl                %ecx, %ecx
++0x13c	nopl                (%rax)
++0x140	    incq                10305(%rip)
++0x147	    vmovss              (%rbx,%rcx,4), %xmm0
++0x14c	    vaddss              (%rax,%rcx,4), %xmm0, %xmm0
++0x151	    vmovss              %xmm0, (%rbx,%rcx,4)
++0x156	    incq                %rcx
++0x159	    xorl                %edx, %edx
++0x15b	    cmpq                %r14, %rcx
++0x15e	    setge               %dl
++0x161	    incq                16(%r15,%rdx,8)
++0x166	    cmpq                %r14, %rcx
++0x169	    jl                  "main+0x140"
++0x16b	incq                10254(%rip)
++0x172	callq               "DYLD-STUB$$std::__1::chrono::steady_clock::now()"
++0x177	callq               "DYLD-STUB$$clock"
 ```
 ## Modern compiler are integrating vectorization in standard optimization configuration
 
 
-interesting to notice that we are a bit lost here because the optimizer has even optimized sse128! 
+Interesting to notice that we are a bit lost here because the optimizer has even optimized sse128, it is clever enough to have use sse256 to optimize sse128:heart_eyes: 
 
 
 ## Profiling Tools
-Rather than including marker in the code in a form of logging information, a better approadch is to use profiling tools like valgrind on linux or Instruments on osx.
+Rather than including marker in the code in a form of logging information, a better approach is to use profiling tools like valgrind on linux or Instruments on osx.
 
 <img src="./Images/AVX-CPU-Profile.png" width=70% >
 
+
+### Rerpot if the optimizer succeeded in vetorized
+
+```
+-Rpass=loop-vectorize identifies loops that were successfully vectorized.
+
+-Rpass-missed=loop-vectorize identifies loops that failed vectorization and indicates if vectorization was specified.
+
+-Rpass-analysis=loop-vectorize identifies the statements that caused vectorization to fail.
+```
+
+it shows interactively in eclipse in front of each loop whether it has been or not optimized
+
+at compile time it will indicate as well something like 
+
+```
+../src/AVX Test Single Precision.cpp:85:2: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+        for (int i = 0; i < N / 2; ++i)
+../src/AVX Test Single Precision.cpp:191:2: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+        for (int i = 0; i < nb_iters; ++i, ++ptr, ++ptr2, a += 32 
+```
 
