@@ -52,7 +52,11 @@ void mm_store(float* f, U u) {
 
 template<typename U>
 void mm_store(double* d, U u) {
+<<<<<<< HEAD
 	_mm_store_pd(d, (__m128d ) u);
+=======
+	_mm_store_pd(d, ( __m128d )u);
+>>>>>>> refs/remotes/origin/master
 }
 
 template<typename T, typename U> void mm256_store(T t, U u);
@@ -64,7 +68,11 @@ void mm256_store(float* f, U u) {
 
 template<typename U>
 void mm256_store(double* d, U u) {
+<<<<<<< HEAD
 	_mm256_store_pd(d, (__m256d ) u);
+=======
+	_mm256_store_pd(d,( __m256d ) u);
+>>>>>>> refs/remotes/origin/master
 }
 
 // compile making sure you have support for AVX2 : compiler option -mavx2
@@ -101,12 +109,21 @@ void sse128_sqrt(T* a, int N) {
 
 	for (int i = 0; i < nb_iters; ++i, ++ptr, a += 16 / sizeof(T))
 		mm_store(a,
+<<<<<<< HEAD
 #if float == T
 				_mm_sqrt_ps((__m128 )*ptr)
 #else
 				_mm_sqrt_pd((__m128d ) *ptr)
 #endif
 						);
+=======
+				#if float == T
+				 _mm_sqrt_ps((__m128 )*ptr)
+#else
+	 _mm_sqrt_pd((__m128d )*ptr)
+#endif
+		);
+>>>>>>> refs/remotes/origin/master
 }
 template<typename T>
 void sse128_add(T* a, int N) {
@@ -118,9 +135,15 @@ void sse128_add(T* a, int N) {
 	for (int i = 0; i < nb_iters; ++i, ++ptr, ++ptr2, a += 16 / sizeof(T))
 		mm_store(a,
 #if float == T
+<<<<<<< HEAD
 				_mm_add_ps((__m128 )*ptr, (__m128 )*ptr2)
 #else
 				_mm_add_pd((__m128d ) *ptr, (__m128d ) *ptr2)
+=======
+						_mm_add_ps((__m128 )*ptr, (__m128 )*ptr2)
+#else
+						_mm_add_pd((__m128d )*ptr, (__m128d )*ptr2)
+>>>>>>> refs/remotes/origin/master
 #endif
 						);
 }
@@ -137,9 +160,15 @@ void sse128_sub(T* a, int N) {
 #if float == T
 				_mm_sub_ps(*ptr, *ptr2)
 #else
+<<<<<<< HEAD
 				_mm_sub_pd((__m128d ) *ptr, (__m128d ) *ptr2)
 #endif
 						);
+=======
+				_mm_sub_pd((__m128d )*ptr, (__m128d )*ptr2)
+#endif
+				);
+>>>>>>> refs/remotes/origin/master
 }
 
 template<typename T>
@@ -154,9 +183,15 @@ void sse128_div(T* a, int N) {
 #if float == T
 				_mm_div_ps(*ptr, *ptr2)
 #else
+<<<<<<< HEAD
 				_mm_div_pd((__m128d ) *ptr, (__m128d ) *ptr2)
 #endif
 						);
+=======
+				_mm_div_pd((__m128d )*ptr, (__m128d )*ptr2)
+#endif
+				);
+>>>>>>> refs/remotes/origin/master
 }
 template<typename T>
 void sse256_sqrt(T* a, int N) {
@@ -169,9 +204,15 @@ void sse256_sqrt(T* a, int N) {
 #if float == T
 				_mm256_sqrt_ps((__m256 )*ptr)
 #else
+<<<<<<< HEAD
 				_mm256_sqrt_pd((__m256d )*ptr)
 #endif
 				);
+=======
+				_mm256_sqrt_pd((__m256d )*ptr
+#endif
+						);
+>>>>>>> refs/remotes/origin/master
 }
 
 	template<typename T>
@@ -182,6 +223,7 @@ void sse256_sqrt(T* a, int N) {
 		__m256* ptr2 = (__m256*) &(a[N/2]);
 
 	for (int i = 0; i < nb_iters; ++i, ++ptr, ++ptr2, a += 32 / sizeof(T))
+<<<<<<< HEAD
 	mm256_store(a,
 #if float == T
 			_mm256_add_ps((__m256 )*ptr, (__m256 )*ptr2)
@@ -190,6 +232,14 @@ void sse256_sqrt(T* a, int N) {
 
 #endif
 	);
+=======
+		mm256_store(a,
+#if float == T
+				_mm256_add_ps((__m256 )*ptr, (__m256 )*ptr2)
+#else
+#endif
+				);
+>>>>>>> refs/remotes/origin/master
 }
 
 template<typename T>
@@ -204,7 +254,11 @@ void sse256_sub(T* a, int N) {
 #if float == T
 				_mm256_sub_ps(*ptr, *ptr2)
 #else
+<<<<<<< HEAD
 				_mm256_sub_pd((__m256d ) *ptr, (__m256d ) *ptr2)
+=======
+						_mm256_sub_pd((__m256d )*ptr, (__m256d )*ptr2)
+>>>>>>> refs/remotes/origin/master
 #endif
 						);
 }
@@ -221,7 +275,11 @@ void sse256_div(T* a, int N) {
 #if float == T
 				_mm256_div_ps(*ptr, *ptr2)
 #else
+<<<<<<< HEAD
 				_mm256_div_pd((__m256d ) *ptr, (__m256d ) *ptr2)
+=======
+						_mm256_div_pd((__m256d )*ptr, (__m256d )*ptr2)
+>>>>>>> refs/remotes/origin/master
 #endif
 						);
 }
