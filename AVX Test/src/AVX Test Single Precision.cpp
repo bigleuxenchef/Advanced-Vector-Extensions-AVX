@@ -52,11 +52,8 @@ void mm_store(float* f, U u) {
 
 template<typename U>
 void mm_store(double* d, U u) {
-<<<<<<< HEAD
 	_mm_store_pd(d, (__m128d ) u);
-=======
-	_mm_store_pd(d, ( __m128d )u);
->>>>>>> refs/remotes/origin/master
+
 }
 
 template<typename T, typename U> void mm256_store(T t, U u);
