@@ -14,7 +14,7 @@ Coming back to C++, as it becomes clear that the new object oriented paradigm wa
 
 <img src="./Images/ProcessInfoJava-C++.png" width=50% >
 
-<img src="./Images/Junit.tiff" width=50% >
+<img src="./Images/Junit.png" width=50% >
 
 
 <img src="./Images/VisualVM.png" width=50% >
