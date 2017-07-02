@@ -76,7 +76,7 @@ test_normal_sub => Java/Inline Float      Results Iteration
 
 in a world of plenty, java does not encourage developer to write efficient code even though lot of good developer write efficient java code. 
 
-## Observation #3 : C++ template have no match to reach abstraction than java generics
+### Observation #3 : C++ template have no match to reach abstraction than java generics
 
 Java has copied C++, Java has simplified C++ all great.
 However java has template implementation not practical to use. Runtime generated with generic is taking way too much time to run and level of abstraction does not reach the purpose of their equivalent in C++. I doubt good java developer using them intensively.
