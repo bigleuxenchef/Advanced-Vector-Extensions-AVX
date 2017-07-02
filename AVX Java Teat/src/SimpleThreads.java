@@ -60,7 +60,7 @@ public class SimpleThreads {
 	private static class TestLoop implements Runnable {
 		public void run() {
 			int i = 0;
-			int N = 5120000;
+			int N = 51200000;
 			float[] a = new float[N];
 			Number[] b = new Number[N];
 
