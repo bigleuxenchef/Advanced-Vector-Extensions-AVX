@@ -69,7 +69,7 @@ test_normal_sub => Java/Inline Float      Results Iteration
 
 ### Some high level profiling information
 
-<img src="./Images/VisualVM.png" width=50% >
+<img src="./Images/VisualVM.png" width=100% >
 
 
 ### Observation #2 : Java may be scalable but what a cost!
