@@ -46,6 +46,17 @@ public class SimpleThreads {
 
 	}
 
+	static <T extends Number> void normal_addT2(T a[], int N) {
+		for (int i = 0; i < N / 2; ++i) {
+			if (a[0] instanceof Float)
+
+				a[i] = (T) (Number) (a[i].floatValue() + a[N / 2 + i].floatValue());
+			else if (a[0] instanceof Double)
+				a[i] = (T) (Number) (a[i].doubleValue() + a[N / 2 + i].doubleValue());
+		}
+
+	}
+
 	private static class TestLoop implements Runnable {
 		public void run() {
 			int i = 0;

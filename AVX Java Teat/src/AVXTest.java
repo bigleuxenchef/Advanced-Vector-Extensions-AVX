@@ -185,4 +185,42 @@ public class AVXTest {
 
 
 	}
+	
+	
+	
+
+	@Test
+	@RunInThread
+	public void test_normal_addT2() {
+		Number[] b = new Number[N];
+
+		for (i = 0; i < N; ++i) {
+			b[i] = (float) (3141592.653588 + i);
+		}
+
+		long timeStart = System.currentTimeMillis();
+
+		SimpleThreads.normal_addT2(b, N);
+
+		TimeDuration = System.currentTimeMillis() - timeStart;
+
+
+	}
+	@Test
+	@RunInThread
+	public void test_normal_addT2_d() {
+		Number[] b = new Number[N];
+
+		for (i = 0; i < N; ++i) {
+			b[i] = (double) (3141592.653588 + i);
+		}
+
+		long timeStart = System.currentTimeMillis();
+
+		SimpleThreads.normal_addT2(b, N);
+
+		TimeDuration = System.currentTimeMillis() - timeStart;
+
+
+	}
 }
