@@ -3,7 +3,7 @@
 // Author      : rumi
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style, I always like testing technology with Hello worl appraoch, it becomes rapidely more than just hellow world
+// Description : Hello World in C++, Ansi-style, I always like testing technology with Hello world approach, it becomes rapidly more than just hello world
 // anyway this has allowed me pushing my C++ rusty knowledge in action, I know  I could have avoided playing with template but  I love it.
 // furthermore the Intel routine for vectorization are not necessarily package the way I like.
 // there is one optimization in the code I may do later is to merge the 128 and 256 routines in the same template :-)
