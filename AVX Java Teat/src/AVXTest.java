@@ -1,10 +1,13 @@
 import static org.junit.Assert.*;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+
+ 
 
 // JM options
 // -ea
@@ -22,12 +25,13 @@ public class AVXTest {
 	static long TimeDuration;
 	static int i=0;
 	
+	
 	@Rule
 	public TestName name = new TestName();
 
-	@Rule
-	public RunInThreadRule runInThread = new RunInThreadRule();
-
+	
+	
+	
 	@BeforeClass
 	public static void initialize() {
 		System.out.printf("\n\n!!!Hello World OF Advanced Vector Extensions for : iteration : %d \n", N);
@@ -45,7 +49,6 @@ public class AVXTest {
 	
 
 	@Test
-	//@RunInThread
 	public void test_normal_add() {
 		float[] a = new float[N];
 
@@ -62,7 +65,6 @@ public class AVXTest {
 	}
 
 	@Test
-	//@RunInThread
 	public void test_normal_sub() {
 		float[] a = new float[N];
 
@@ -79,7 +81,6 @@ public class AVXTest {
 	}
 
 	@Test
-	//@RunInThread
 	public void test_normal_add_d() {
 		double[] a = new double[N];
 
@@ -98,7 +99,6 @@ public class AVXTest {
 	}
 
 	@Test
-	//@RunInThread
 	public void test_normal_sub_d() {
 		double[] a = new double[N];
 
@@ -115,7 +115,6 @@ public class AVXTest {
 	}
 
 	@Test
-	@RunInThread
 	public void test_normal_subT() {
 		Number[] b = new Number[N];
 
@@ -133,7 +132,6 @@ public class AVXTest {
 	}
 	
 	@Test //(timeout=1000)
-	@RunInThread
 	public void test_normal_subT_d() {
 		Number[] b = new Number[N];
 
@@ -152,7 +150,6 @@ public class AVXTest {
 	
 	
 	@Test
-	@RunInThread
 	public void test_normal_addT() {
 		Number[] b = new Number[N];
 
@@ -169,7 +166,6 @@ public class AVXTest {
 
 	}
 	@Test
-	@RunInThread
 	public void test_normal_addT_d() {
 		Number[] b = new Number[N];
 
@@ -190,7 +186,6 @@ public class AVXTest {
 	
 
 	@Test
-	@RunInThread
 	public void test_normal_addT2() {
 		Number[] b = new Number[N];
 
@@ -207,7 +202,6 @@ public class AVXTest {
 
 	}
 	@Test
-	@RunInThread
 	public void test_normal_addT2_d() {
 		Number[] b = new Number[N];
 
